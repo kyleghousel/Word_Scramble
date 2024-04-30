@@ -14,6 +14,7 @@
 		BBDB37402BD7FD3300D0EC8E /* Word_ScrambleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDB373F2BD7FD3300D0EC8E /* Word_ScrambleTests.swift */; };
 		BBDB374A2BD7FD3300D0EC8E /* Word_ScrambleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDB37492BD7FD3300D0EC8E /* Word_ScrambleUITests.swift */; };
 		BBDB374C2BD7FD3300D0EC8E /* Word_ScrambleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDB374B2BD7FD3300D0EC8E /* Word_ScrambleUITestsLaunchTests.swift */; };
+		BBDD327E2BDF266E000D3687 /* start.txt in Resources */ = {isa = PBXBuildFile; fileRef = BBDD327D2BDF266E000D3687 /* start.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		BBDB37452BD7FD3300D0EC8E /* Word_ScrambleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Word_ScrambleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBDB37492BD7FD3300D0EC8E /* Word_ScrambleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word_ScrambleUITests.swift; sourceTree = "<group>"; };
 		BBDB374B2BD7FD3300D0EC8E /* Word_ScrambleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word_ScrambleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BBDD327D2BDF266E000D3687 /* start.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 			children = (
 				BBDB37492BD7FD3300D0EC8E /* Word_ScrambleUITests.swift */,
 				BBDB374B2BD7FD3300D0EC8E /* Word_ScrambleUITestsLaunchTests.swift */,
+				BBDD327D2BDF266E000D3687 /* start.txt */,
 			);
 			path = Word_ScrambleUITests;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBDB37362BD7FD3200D0EC8E /* Preview Assets.xcassets in Resources */,
+				BBDD327E2BDF266E000D3687 /* start.txt in Resources */,
 				BBDB37332BD7FD3200D0EC8E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
