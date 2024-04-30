@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var rootWord = ""
     @State private var newWord = ""
     @State private var score = 0
+    @FocusState private var isTextFieldFocused: Bool
     
     @State private var errorTitle = ""
     @State private var errorMessage = ""
@@ -32,15 +33,28 @@ struct ContentView: View {
             }
             
             NavigationStack {
+                
                 List {
+                    
                     Section {
+                        
                         TextField("Enter your word", text: $newWord)
                             .textInputAutocapitalization(.never)
+                            .focused($isTextFieldFocused)
+                            .onAppear {
+                                isTextFieldFocused = true
+                            }
+                            .onDisappear {
+                                isTextFieldFocused = false
+                            }
                     }
                     
                     Section {
+                        
                         ForEach(usedWords, id: \.self ) { word in
+                            
                             HStack{
+                                
                                 Image(systemName: "\(word.count).circle")
                                 Text(word)
                             }
@@ -64,9 +78,10 @@ struct ContentView: View {
                                     .fontWeight(.medium)
                                 Spacer()
                                 Button("New Game") {
-                                    startGame()
                                     usedWords = [String]()
                                     newWord = ""
+                                    score = 0
+                                    startGame()
                                 }
                                 .buttonStyle(CustomToolbarButtonStyle())
                             }
