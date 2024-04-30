@@ -11,48 +11,73 @@ struct ContentView: View {
     @State private var usedWords = [String]()
     @State private var rootWord = ""
     @State private var newWord = ""
+    @State private var score = 0
     
     @State private var errorTitle = ""
     @State private var errorMessage = ""
     @State private var showingError = false
     
     var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    TextField("Enter your word", text: $newWord)
-                        .textInputAutocapitalization(.never)
-                }
-                
-                Section {
-                    ForEach(usedWords, id: \.self ) { word in
-                        HStack{
-                            Image(systemName: "\(word.count).circle")
-                            Text(word)
+        VStack(spacing: 0) {
+            ZStack {
+                   Rectangle()
+                        .foregroundColor(.black)
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                    
+                    Text("Word Scramble")
+                        .font(.custom("Verdana", size: 30.0))
+                        .fontWeight(.bold)
+                        .foregroundColor(.mint)
+            }
+            
+            NavigationStack {
+                List {
+                    Section {
+                        TextField("Enter your word", text: $newWord)
+                            .textInputAutocapitalization(.never)
+                    }
+                    
+                    Section {
+                        ForEach(usedWords, id: \.self ) { word in
+                            HStack{
+                                Image(systemName: "\(word.count).circle")
+                                Text(word)
+                            }
                         }
                     }
+                    
                 }
-                
-            }
-            .navigationTitle(rootWord)
-            .onSubmit(addNewWord)
-            .onAppear(perform: startGame)
-            .alert(errorTitle, isPresented: $showingError) {
-                Button("OK") {}
-            } message:  {
-                Text(errorMessage)
-            }
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    Button("New Game") {
-                        startGame()
-                        usedWords = [String]()
-                        newWord = ""
+                .navigationTitle(rootWord)
+                .onSubmit(addNewWord)
+                .onAppear(perform: startGame)
+                .alert(errorTitle, isPresented: $showingError) {
+                    Button("OK") {}
+                } message:  {
+                    Text(errorMessage)
+                }
+                    .toolbar {
+                        ToolbarItem(placement: .bottomBar) {
+                            HStack {
+                                Text("Score: \(score)")
+                                    .font(.title)
+                                    .fontWeight(.medium)
+                                Spacer()
+                                Button("New Game") {
+                                    startGame()
+                                    usedWords = [String]()
+                                    newWord = ""
+                                }
+                                .buttonStyle(CustomToolbarButtonStyle())
+                            }
+                            .padding()
+                        }
+                        
                     }
-                    .buttonStyle(CustomToolbarButtonStyle())
-                }
             }
+            
         }
+        
     }
     func addNewWord() {
         
@@ -91,6 +116,7 @@ struct ContentView: View {
             return
         }
         
+        score += answer.count + usedWords.count
         newWord = ""
     }
     
@@ -148,9 +174,11 @@ struct CustomToolbarButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(15)
-            .foregroundColor(.white)
-            .background(configuration.isPressed ? Color.black.opacity(0.8) : Color.black)
+            .foregroundColor(.black)
+            .background(configuration.isPressed ? Color.mint.opacity(0.8) : Color.mint)
             .cornerRadius(8)
+            .fontWeight(.heavy)
+            .font(.custom("Verdana", size: 20.0))
     }
 }
 
