@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var usedWords = [String]()
-    @State private var rootWord = ""
-    @State private var newWord = ""
-    @State private var score = 0
+    @StateObject private var game = WordScrambleGame()
     @FocusState private var isTextFieldFocused: Bool
     
     @State private var errorTitle = ""
@@ -38,7 +35,7 @@ struct ContentView: View {
                     
                     Section {
                         
-                        TextField("Enter your word", text: $newWord)
+                        TextField("Enter your word", text: game.newWordBinding)
                             .textInputAutocapitalization(.never)
                             .focused($isTextFieldFocused)
                             .onAppear {
@@ -51,7 +48,7 @@ struct ContentView: View {
                     
                     Section {
                         
-                        ForEach(usedWords, id: \.self ) { word in
+                        ForEach(game.usedWords, id: \.self ) { word in
                             
                             HStack{
                                 
@@ -62,9 +59,9 @@ struct ContentView: View {
                     }
                     
                 }
-                .navigationTitle(rootWord)
-                .onSubmit(addNewWord)
-                .onAppear(perform: startGame)
+                .navigationTitle(game.rootWord)
+                .onSubmit(game.addNewWord)
+                .onAppear(perform: game.startGame)
                 .alert(errorTitle, isPresented: $showingError) {
                     Button("OK") {}
                 } message:  {
@@ -73,15 +70,15 @@ struct ContentView: View {
                     .toolbar {
                         ToolbarItem(placement: .bottomBar) {
                             HStack {
-                                Text("Score: \(score)")
+                                Text("Score: \(game.score)")
                                     .font(.title)
                                     .fontWeight(.medium)
                                 Spacer()
                                 Button("New Game") {
-                                    usedWords = [String]()
-                                    newWord = ""
-                                    score = 0
-                                    startGame()
+                                    game.usedWords = [String]()
+                                    game.newWord = ""
+                                    game.score = 0
+                                    game.startGame()
                                 }
                                 .buttonStyle(CustomToolbarButtonStyle())
                             }
@@ -94,94 +91,6 @@ struct ContentView: View {
         }
         
     }
-    func addNewWord() {
-        
-        let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        guard answer.count > 0 else {return}
-        
-        guard isOriginal(word: answer) else {
-            wordError(title: "Word used already", message: "Be more original.")
-            return
-        }
-        
-        guard isPossible(word: answer) else {
-            wordError(title: "Word not possible.", message: "You can't spell that word from '\(rootWord)'!")
-            return
-        }
-        
-        guard isReal(word: answer) else {
-            wordError(title: "Word not recognized.", message: "You can't just make them up, you know.")
-            return
-        }
-        
-        func isValid(word: String) -> Bool {
-            if word.count < 3 || word == rootWord {
-                return false
-            } else {
-                withAnimation {
-                    usedWords.insert(answer, at: 0)
-                }
-                return true
-            }
-        }
-
-        guard isValid(word: answer) else {
-            wordError(title: "Word not valid.", message: "Your word is either too short or the same as the given word.")
-            return
-        }
-        
-        score += answer.count + usedWords.count
-        newWord = ""
-    }
-    
-    func startGame() {
-        if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
-            if let startWords = try? String(contentsOf: startWordsURL) {
-                let allWords = startWords.components(separatedBy: "\n")
-                
-                rootWord = allWords.randomElement() ?? "silkworm"
-                
-                return
-            }
-        }
-        
-        fatalError("Could not load start.txt from bundle.")
-    }
-    
-    func isOriginal(word: String) -> Bool {
-        !usedWords.contains(word)
-    }
-    
-    func isPossible(word: String) -> Bool {
-        var tempWord = rootWord
-
-        for letter in word {
-            if let pos = tempWord.firstIndex(of: letter) {
-                tempWord.remove(at: pos)
-            } else {
-                return false
-            }
-        }
-
-        return true
-    }
-    
-    func isReal(word: String) -> Bool {
-        let checker = UITextChecker()
-        let range = NSRange(location: 0, length: word.utf16.count)
-        let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
-
-        return misspelledRange.location == NSNotFound
-    }
-    
-    func wordError(title: String, message: String) {
-        errorTitle = title
-        errorMessage = message
-        showingError = true
-    }
-    
-    
     
 }
 
@@ -197,6 +106,6 @@ struct CustomToolbarButtonStyle: ButtonStyle {
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
