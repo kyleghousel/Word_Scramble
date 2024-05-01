@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB5A1A082BE18C2800D2DF68 /* Word_Scramble_model_logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A1A072BE18C2800D2DF68 /* Word_Scramble_model_logic.swift */; };
 		BBDB372F2BD7FD3000D0EC8E /* Word_ScrambleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDB372E2BD7FD3000D0EC8E /* Word_ScrambleApp.swift */; };
 		BBDB37312BD7FD3000D0EC8E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDB37302BD7FD3000D0EC8E /* ContentView.swift */; };
 		BBDB37332BD7FD3200D0EC8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBDB37322BD7FD3200D0EC8E /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB5A1A072BE18C2800D2DF68 /* Word_Scramble_model_logic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word_Scramble_model_logic.swift; sourceTree = "<group>"; };
 		BBDB372B2BD7FD3000D0EC8E /* Word_Scramble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Word_Scramble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBDB372E2BD7FD3000D0EC8E /* Word_ScrambleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word_ScrambleApp.swift; sourceTree = "<group>"; };
 		BBDB37302BD7FD3000D0EC8E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				BBDB372E2BD7FD3000D0EC8E /* Word_ScrambleApp.swift */,
+				BB5A1A072BE18C2800D2DF68 /* Word_Scramble_model_logic.swift */,
 				BBDB37302BD7FD3000D0EC8E /* ContentView.swift */,
 				BBDB37322BD7FD3200D0EC8E /* Assets.xcassets */,
 				BBDB37342BD7FD3200D0EC8E /* Preview Content */,
@@ -263,6 +266,7 @@
 			files = (
 				BBDB37312BD7FD3000D0EC8E /* ContentView.swift in Sources */,
 				BBDB372F2BD7FD3000D0EC8E /* Word_ScrambleApp.swift in Sources */,
+				BB5A1A082BE18C2800D2DF68 /* Word_Scramble_model_logic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
